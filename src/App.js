@@ -21,19 +21,23 @@ function App() {
     {
       id: 1,
       username: 'velopert',
-      email: 'public.velopert@gmail.com'
+      email: 'public.velopert@gmail.com',
+      active: true
     },
     {
       id: 2,
       username: 'tester',
-      email: 'tester@example.com'
+      email: 'tester@example.com',
+      active: false
     },
     {
       id: 3,
       username: 'liz',
-      email: 'liz@example.com'
+      email: 'liz@example.com',
+      active: false
     }
   ]);
+
 
   /* nextId 값을 useref 를 사용하여 관리합니다. 변수의 값이 바뀌어도 컴포넌트가 리랜더링 되지 않습니다. */
   const nextId = useRef(4);
@@ -45,7 +49,7 @@ function App() {
       email,
     }
 
-    setUsers(users.concat(user)); /* [...users, user] */
+    setUsers(users.concat(user)); /* [...users, user] 동일한 방법 */
 
     setInputs({
       username: '',
@@ -53,6 +57,17 @@ function App() {
     });
 
     nextId.current += 1;
+  };
+
+  const onRemove = id => {
+      setUsers(users.filter(user => user.id !== id));
+  };
+
+  const onToggle = (id) => {
+      setUsers(users.map(
+          user => user.id === id ? {...user, active: !user.active} : user
+      ));
+
   }
 
   return (
@@ -61,9 +76,9 @@ function App() {
             username={username}
             email={email}
             onCreate={onCreate}
-            onChange={onChange}>
-        </CreateUser>
-        <UserList users={users} />
+            onChange={onChange}
+        />
+        <UserList users={users} onRemove={onRemove} onToggle={onToggle} />
       </>
   );
 }
