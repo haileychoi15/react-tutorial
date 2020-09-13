@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 /* 배열 랜더링하기 */
 
-function User({ user, onRemove, onToggle }) { /* App.js 에서 props로 받아옵니다. */
+const User = React.memo(function User({ user, onRemove, onToggle }) { /* App.js 에서 props로 받아옵니다. */
     const { username, email, id, active } = user;
+    useEffect(() => {
+        console.log('컴포넌트 나타남')
+    }, []);
     return (
         <div>
             <b style={{
@@ -19,7 +22,7 @@ function User({ user, onRemove, onToggle }) { /* App.js 에서 props로 받아�
             <button onClick={() => onRemove(id)}>삭제</button> {/* 파라미터를 전달하기 위해 함수 형태로 작성 */}
         </div>
     );
-}
+});
 
 function UserList({ users, onRemove, onToggle }) {
     return (
@@ -40,4 +43,4 @@ function UserList({ users, onRemove, onToggle }) {
     );
 }
 
-export default UserList;
+export default React.memo(UserList);
