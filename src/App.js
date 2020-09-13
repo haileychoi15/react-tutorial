@@ -2,6 +2,7 @@ import React, { useRef, useState, useReducer, useMemo, useCallback } from 'react
 import './App.css';
 import UserList from "./UserList";
 import CreateUser from "./CreateUser";
+import useInputs from "./useInputs";
 
 function countActiveUsers(users) {
   console.log('지금 접속 중인 사용자 수를 세는 중...');
@@ -9,10 +10,10 @@ function countActiveUsers(users) {
 }
 
 const initialState = {
-  inputs: {
+/*  inputs: {
     username: '',
     email: '',
-  },
+  },*/
   users: [
     {
       id: 1,
@@ -37,14 +38,14 @@ const initialState = {
 
 function reducer(state, action) {
   switch (action.type) {
-    case 'CHANGE_INPUT':
+/*    case 'CHANGE_INPUT':
       return {
         ...state,
         inputs: {
           ...state.inputs,
           [action.name]: action.value
         }
-      };
+      };*/
     case 'CREATE_USER':
       return {
         inputs: initialState.inputs,
@@ -69,18 +70,23 @@ function reducer(state, action) {
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const [form, onChange, reset] = useInputs({
+    username: '',
+    email: ''
+  });
+  const { username, email } = form;
   const nextId = useRef(4);
   const { users } = state;
-  const { username, email } = state.inputs;
+/*  const { username, email } = state.inputs;*/
 
-  const onChange = useCallback(e => {
+/*  const onChange = useCallback(e => {
     const { name, value } = e.target;
     dispatch({
       type: 'CHANGE_INPUT',
       name,
       value
     });
-  }, []);
+  }, []);*/
 
   const onCreate = useCallback(() => {
     dispatch({
@@ -91,8 +97,9 @@ function App() {
         email
       }
     });
+    reset(); /* useInputs에서 받아온 reset 함수 호출 */
     nextId.current += 1;
-  }, [username, email]);
+  }, [username, email, reset]);
 
   const onToggle = useCallback(id => {
     dispatch({
