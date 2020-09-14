@@ -1,7 +1,31 @@
-import React from 'react';
+import React, {useRef, useContext, useCallback} from 'react';
+import { UserDispatch } from "./App";
+import useInputs from "./useInputs";
 
-function CreateUser({ username, email, onChange, onCreate }) {
-    console.log('CreateUser 리랜더링');
+function CreateUser() {
+    const [form, onChange, reset] = useInputs({
+        username: '',
+        email: ''
+    });
+    const { username, email } = form;
+    const nextId = useRef(4);
+    const dispatch = useContext(UserDispatch);
+
+    const onCreate = () => {
+        dispatch({
+            type: 'CREATE_USER',
+            user: {
+                id: nextId.current,
+                username,
+                email
+            }
+        });
+        reset(); /* useInputs에서 받아온 reset 함수 호출 */
+        nextId.current += 1;
+    };
+
+    console.log(nextId.current);
+
     return (
         <div>
             <input
@@ -16,7 +40,8 @@ function CreateUser({ username, email, onChange, onCreate }) {
                 onChange={onChange}
                 value={email}
             />
-            <button onClick={onCreate}>등록</button>
+            <button onClick={onCreate}
+            >등록</button>
         </div>
     );
 }
