@@ -1,0 +1,27 @@
+$blue: #338be6;
+
+.Button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  height: 2.25rem;
+  color: #fff;
+  font: {
+    size: 1rem;
+    weight: 700;
+  }
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: {
+    left: 1rem;
+    right: 1rem;
+  };
+  background: $blue;
+  &:hover {
+    background: lighten($blue, 10%);
+  }
+  &:active {
+    background: darken($blue, 10%);
+  }
+}
