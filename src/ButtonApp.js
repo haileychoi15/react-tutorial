@@ -6,7 +6,9 @@ function ButtonApp() {
   return (
       <div className="App">
         <div className="buttons">
-          <Button>Button</Button>
+          <Button size="large">Click</Button>
+          <Button>Click</Button>
+          <Button size="small">Click</Button>
         </div>
       </div>
   );

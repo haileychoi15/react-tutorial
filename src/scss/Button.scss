@@ -4,24 +4,42 @@ $blue: #338be6;
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  height: 2.25rem;
   color: #fff;
-  font: {
-    size: 1rem;
-    weight: 700;
-  }
+  font-weight: 700;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  background: $blue;
   padding: {
     left: 1rem;
     right: 1rem;
   };
-  background: $blue;
+
+  &.large {
+    height: 3rem;
+    font-size: 1rem;
+  }
+
+  &.medium {
+    height: 2.25rem;
+    font-size: 1rem;
+  }
+
+  &.small {
+    height: 1.75rem;
+    font-size: 0.875rem;
+  }
+
   &:hover {
     background: lighten($blue, 10%);
+
   }
   &:active, &:focus {
     outline: none;
   }
+
+  & + & { // .Button + .Button 같이 있을 때 오른쪽 애한테 스타일을 지정하겠다.
+    margin-left: 1rem;
+  }
 }
+
