@@ -5,10 +5,18 @@ import './Button.scss';
 
 // size: large, medium, small
 // color: blue, pink, gray
-function Button({ children, size, color, outline, fullWidth }) {
+function Button({ children, size, color, outline, fullWidth, className, ...rest }) {
+  console.log(rest); // Object: {onClick: ƒ, onMouseMove: ƒ}
   return <button className={classNames('Button', size, color, {
-    outline, fullWidth
-  })}>{children}</button>
+            outline,
+            fullWidth
+          },
+            className
+          )}
+            {...rest}
+          >
+            {children}
+         </button>
 }
 
 // outline와 fullWidth은 boolean 타입이기때문에 파라미터로 안넘어오면 undefined이다.
