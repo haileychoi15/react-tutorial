@@ -1,5 +1,5 @@
 import React, {useEffect, useContext, useCallback} from 'react';
-import { UserDispatch } from "./App";
+import { UserDispatch } from "../UserApp";
 
 /* 배열 랜더링하기 */
 

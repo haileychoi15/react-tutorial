@@ -21,7 +21,7 @@ $blue: #338be6;
   &:hover {
     background: lighten($blue, 10%);
   }
-  &:active {
-    background: darken($blue, 10%);
+  &:active, &:focus {
+    outline: none;
   }
 }
