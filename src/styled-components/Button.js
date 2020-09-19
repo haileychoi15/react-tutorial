@@ -3,8 +3,7 @@ import styled, { css } from 'styled-components';
 import { darken, lighten } from 'polished';
 
 const colorStyles = css`
-  /* 색상 */
-  ${({ theme, color}) => { // props 를 함수로 가져오는 코드, 비구조화 할당
+  ${({ theme, color }) => {
   const selected = theme.palette[color];
   return css`
       background: ${selected};
@@ -14,8 +13,19 @@ const colorStyles = css`
       &:active {
         background: ${darken(0.1, selected)};
       }
-    `
-}};  
+      ${props =>
+      props.outline &&
+      css`
+          color: ${selected};
+          background: none;
+          border: 1px solid ${selected};
+          &:hover {
+            background: ${selected};
+            color: white;
+          }
+        `}
+    `;
+}}
 `;
 
 const sizes = {
@@ -25,50 +35,72 @@ const sizes = {
   },
   medium: {
     height: '2.25rem',
-    fontSize: '1.25rem'
+    fontSize: '1rem'
   },
   small: {
     height: '1.75rem',
     fontSize: '0.875rem'
   }
-}
+};
 
 const sizeStyles = css`
-  /* 크기 */
-  ${ ({ size }) => css` // props 에서 size 만 추출
+  ${({ size }) => css`
     height: ${sizes[size].height};
     font-size: ${sizes[size].fontSize};
+  `}
+`;
+
+const fullWidthStyle = css`
+  ${props =>
+    props.fullWidth &&
+    css`
+      width: 100%;
+      justify-content: center;
+      & + & {
+        margin-left: 0;
+        margin-top: 1rem;
+      }
     `}
 `;
 
 const StyledButton = styled.button`
-  /* 공통스타일 */
+  /* 공통 스타일 */
   display: inline-flex;
   align-items: center;
   outline: none;
   border: none;
   border-radius: 4px;
-  color: #fff;
+  color: white;
   font-weight: bold;
   cursor: pointer;
-  padding: {
-    left: 1rem;
-    right: 1rem;
-  };
-  
+  padding-left: 1rem;
+  padding-right: 1rem;
+
+  /* 크기 */
   ${sizeStyles}
+
+  /* 색상 */
   ${colorStyles}
-  
+
   /* 기타 */
   & + & {
-    margin-left: 1rem;  
+    margin-left: 1rem;
   }
+
+  ${fullWidthStyle}
 `;
 
-function Button({ children, color, size, ...rest }) {
-  console.log(color, size);
+function Button({ children, color, size, outline, fullWidth, ...rest }) {
   return (
-      <StyledButton color={color} size={size} {...rest}>{children}</StyledButton>
+      <StyledButton
+          color={color}
+          size={size}
+          outline={outline}
+          fullWidth={fullWidth}
+          {...rest}
+      >
+        {children}
+      </StyledButton>
   );
 }
 

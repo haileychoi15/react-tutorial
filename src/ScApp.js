@@ -1,11 +1,11 @@
-import React from "react";
+import React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import Button from './styled-components/Button';
 
 const AppBlock = styled.div`
   width: 512px;
   margin: 4rem auto 0;
-  border: 1px solid #000;
+  border: 1px solid black;
   padding: 1rem;
 `;
 
@@ -15,15 +15,17 @@ const ButtonGroup = styled.div`
   }
 `;
 
-const palette = {
-    blue: '#228be6',
-    gray: '#495057',
-    pink: '#f783ac'
-}
-
 function App() {
     return (
-        <ThemeProvider theme={{palette}}>
+        <ThemeProvider
+            theme={{
+                palette: {
+                    blue: '#228be6',
+                    gray: '#495057',
+                    pink: '#f06595'
+                }
+            }}
+        >
             <AppBlock>
                 <ButtonGroup>
                     <Button size="large">BUTTON</Button>
@@ -31,14 +33,44 @@ function App() {
                     <Button size="small">BUTTON</Button>
                 </ButtonGroup>
                 <ButtonGroup>
-                    <Button color="gray" size="large">BUTTON</Button>
+                    <Button color="gray" size="large">
+                        BUTTON
+                    </Button>
                     <Button color="gray">BUTTON</Button>
-                    <Button color="gray" size="small">BUTTON</Button>
+                    <Button color="gray" size="small">
+                        BUTTON
+                    </Button>
                 </ButtonGroup>
                 <ButtonGroup>
-                    <Button color="pink" size="large">BUTTON</Button>
+                    <Button color="pink" size="large">
+                        BUTTON
+                    </Button>
                     <Button color="pink">BUTTON</Button>
-                    <Button color="pink" size="small">BUTTON</Button>
+                    <Button color="pink" size="small">
+                        BUTTON
+                    </Button>
+                </ButtonGroup>
+                <ButtonGroup>
+                    <Button size="large" outline>
+                        BUTTON
+                    </Button>
+                    <Button color="gray" outline>
+                        BUTTON
+                    </Button>
+                    <Button color="pink" size="small" outline>
+                        BUTTON
+                    </Button>
+                </ButtonGroup>
+                <ButtonGroup>
+                    <Button size="large" fullWidth>
+                        BUTTON
+                    </Button>
+                    <Button size="large" color="gray" fullWidth>
+                        BUTTON
+                    </Button>
+                    <Button size="large" color="pink" fullWidth>
+                        BUTTON
+                    </Button>
                 </ButtonGroup>
             </AppBlock>
         </ThemeProvider>
