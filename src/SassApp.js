@@ -1,8 +1,8 @@
 import React from 'react';
-import './StyleApp.scss';
+import './SassApp.scss';
 import Button from "./scss/Button";
 
-function StyleApp() {
+function App() {
   return (
         <div className="App">
         <div className="buttons">
@@ -37,4 +37,4 @@ function StyleApp() {
   );
 }
 
-export default StyleApp;
+export default App;

@@ -70,7 +70,7 @@ function reducer(state, action) {
 // UserDispatch 라는 이름으로 내보내줍니다.
 export const UserDispatch = createContext(null);
 
-function UserApp() {
+function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { users } = state;
 
@@ -85,4 +85,4 @@ function UserApp() {
   );
 }
 
-export default UserApp;
+export default App;
