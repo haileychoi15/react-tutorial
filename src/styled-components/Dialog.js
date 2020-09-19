@@ -44,15 +44,16 @@ const ShortMarginButton = styled(Button)` // 버튼을 상속받아서 수정
   }
 `;
 
-function Dialog({ title, children, confirmText, cancelText }) {
+function Dialog({ title, children, confirmText, cancelText, visible, onConfirm, onCancel }) {
+    if(!visible) return null;
     return (
         <DarkBackground>
             <DialogBlock>
                 <h3>{title}</h3>
                 <p>{children}</p>
                 <ButtonGroup>
-                    <ShortMarginButton color="gray">{cancelText}</ShortMarginButton>
-                    <ShortMarginButton color="blue">{confirmText}</ShortMarginButton>
+                    <ShortMarginButton color="gray" onClick={onCancel}>{cancelText}</ShortMarginButton>
+                    <ShortMarginButton color="blue" onClick={onConfirm}>{confirmText}</ShortMarginButton>
                 </ButtonGroup>
             </DialogBlock>
         </DarkBackground>
