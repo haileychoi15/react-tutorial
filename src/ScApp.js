@@ -1,5 +1,5 @@
 import React from "react";
-import styled, { css } from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import Button from './styled-components/Button';
 
 const AppBlock = styled.div`
@@ -9,24 +9,39 @@ const AppBlock = styled.div`
   padding: 1rem;
 `;
 
-/*const Circle = styled.div`
-    width: 5em;
-    height: 5rem;
-    background: ${props => props.color};
-    border-radius: 50%;
-    ${props => props.huge 
-        && css`
-        width: 10rem;
-        height: 10rem;
-        ` 
-    }
-`;*/
+const ButtonGroup = styled.div`
+  & + & {
+    margin-top: 1rem;
+  }
+`;
+
+const palette = {
+    blue: '#228be6',
+    gray: '#495057',
+    pink: '#f783ac'
+}
 
 function App() {
     return (
-        <AppBlock>
-            <Button>BUTTON</Button>
-        </AppBlock>
+        <ThemeProvider theme={{palette}}>
+            <AppBlock>
+                <ButtonGroup>
+                    <Button size="large">BUTTON</Button>
+                    <Button>BUTTON</Button>
+                    <Button size="small">BUTTON</Button>
+                </ButtonGroup>
+                <ButtonGroup>
+                    <Button color="gray" size="large">BUTTON</Button>
+                    <Button color="gray">BUTTON</Button>
+                    <Button color="gray" size="small">BUTTON</Button>
+                </ButtonGroup>
+                <ButtonGroup>
+                    <Button color="pink" size="large">BUTTON</Button>
+                    <Button color="pink">BUTTON</Button>
+                    <Button color="pink" size="small">BUTTON</Button>
+                </ButtonGroup>
+            </AppBlock>
+        </ThemeProvider>
     );
 }
 
